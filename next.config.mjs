@@ -2,8 +2,7 @@
 
 const nextConfig = {
   output: 'export',
-  basePath: '',
-  assetPrefix: '',
+  basePath: '/jjinueng.github.io',
   eslint: {
     ignoreDuringBuilds: true,
   },
