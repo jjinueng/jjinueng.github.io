@@ -41,3 +41,6 @@ coverage/
 
 # lint-staged 관련 임시파일
 *.eslintcache
+
+# config 파일
+*.config.js
