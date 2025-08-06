@@ -46,7 +46,7 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold text-gray-900">
-              Kim Jiyoon
+              JJINUENG.DEV
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
@@ -98,7 +98,7 @@ export default function Portfolio() {
               Kim Jiyoon
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
-              Full-stack developer passionate about creating scalable web applications and solving complex technical challenges.
+              나다.
             </p>
           </div>
 
@@ -295,20 +295,13 @@ export default function Portfolio() {
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            {"Let's Work Together"}
+
           </h2>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            {"I'm always interested in new opportunities and exciting projects. "} 
-            {"Let's discuss how we can bring your ideas to life."}
+
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gray-900 hover:bg-gray-800">
-              <Mail className="mr-2 h-4 w-4" />
-              Send Email
-            </Button>
-            <Button size="lg" variant="outline">
-              Download Resume
-            </Button>
+
           </div>
         </div>
       </section>
@@ -323,14 +316,14 @@ export default function Portfolio() {
               </p>
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://github.com/jjinueng" className="text-gray-400 hover:text-white transition-colors">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://linkedin.com/in/jjinueng" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="https://jjinueng.tistory.com/" className="text-gray-400 hover:text-white transition-colors">
+                <Earth className="h-5 w-5" />
               </a>
             </div>
           </div>

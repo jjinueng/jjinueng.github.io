@@ -1,7 +1,13 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import url('https://fastly.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css');
 
 @custom-variant dark (&:is(.dark *));
+
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
 
 :root {
   --background: oklch(1 0 0);
