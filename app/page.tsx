@@ -2,72 +2,40 @@ import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, ExternalLink, Mail, Linkedin, Twitter } from 'lucide-react'
+import { Github, ExternalLink, Mail, Linkedin, Twitter, Earth } from 'lucide-react'
 
 const personalProjects = [
   {
     id: 1,
     title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution built with Next.js, featuring user authentication, payment processing, and inventory management.",
+    description: "-",
     image: "/modern-ecommerce-interface.png",
     tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-    github: "https://github.com/alexjohnson/ecommerce-platform",
+    github: "https://github.com/jjinueng/modern-ecommerce-interface",
     demo: "https://ecommerce-demo.vercel.app"
   },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    image: "/task-management-dashboard.png",
-    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-    github: "https://github.com/alexjohnson/task-manager",
-    demo: "https://taskmanager-demo.netlify.app"
-  },
-  {
-    id: 3,
-    title: "Weather Dashboard",
-    description: "A responsive weather application that provides detailed forecasts, interactive maps, and location-based weather alerts.",
-    image: "/preview/project4.png",
-    tags: ["Vue.js", "API Integration", "Chart.js", "CSS3"],
-    github: "https://github.com/alexjohnson/weather-dashboard",
-    demo: "https://weather-app-demo.surge.sh"
-  },
-  {
-    id: 4,
-    title: "Portfolio Website",
-    description: "A responsive portfolio website showcasing creative work with smooth animations, optimized performance, and modern design.",
-    image: "/creative-portfolio-website.png",
-    tags: ["Gatsby", "GSAP", "Contentful", "Netlify"],
-    github: "https://github.com/alexjohnson/portfolio-v2",
-    demo: "https://alexjohnson-portfolio.com"
-  }
 ]
 
 const companyProjects = [
   {
     id: 1,
-    title: "Enterprise CRM System",
-    description: "Led the development of a comprehensive customer relationship management system serving over 10,000 users. Implemented advanced analytics, automated workflows, and integrated with multiple third-party services to streamline business operations.",
-    tags: ["React", "Node.js", "PostgreSQL", "AWS"]
+    title: "DiTAP JS",
+    description: "-",
+    tags: ["Javascript"]
   },
   {
     id: 2,
-    title: "Financial Trading Platform",
-    description: "Built a high-performance trading platform handling millions of transactions daily. Developed real-time data processing, risk management algorithms, and compliance reporting features for institutional clients.",
-    tags: ["Python", "Django", "Redis", "WebSocket"]
+    title: "DiTAP Builder",
+    description: "-",
+    tags: ["Spring", "Thymeleaf", "PostgreSQL"]
   },
   {
     id: 3,
-    title: "Healthcare Management System",
-    description: "Architected a HIPAA-compliant healthcare management platform connecting patients, providers, and insurance companies. Implemented secure data handling, appointment scheduling, and telemedicine capabilities.",
-    tags: ["Next.js", "TypeScript", "MongoDB", "Docker"]
+    title: "포항 AI 인파 플랫폼",
+    description: "-",
+    tags: ["Spring", "Next.js", "TypeScript", "PostgreSQL"]
   },
-  {
-    id: 4,
-    title: "E-Learning Platform",
-    description: "Developed a scalable learning management system supporting interactive courses, progress tracking, and certification programs. Served over 50,000 students with 99.9% uptime and optimized performance.",
-    tags: ["Vue.js", "Laravel", "MySQL", "Kubernetes"]
-  }
+
 ]
 
 export default function Portfolio() {
@@ -92,14 +60,20 @@ export default function Portfolio() {
               </a>
             </nav>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon">
-                <Github className="h-5 w-5" />
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://github.com/jjinueng" target="_blank" rel="noopener noreferrer">
+                  <Github className="h-5 w-5" />
+                </a>
               </Button>
-              <Button variant="ghost" size="icon">
-                <Linkedin className="h-5 w-5" />
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://linkedin.com/in/jjinueng" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="h-5 w-5" />
+                </a>
               </Button>
-              <Button variant="ghost" size="icon">
-                <Twitter className="h-5 w-5" />
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://jjinueng.tistory.com/" target="_blank" rel="noopener noreferrer">
+                  <Earth className="h-5 w-5" />
+                </a>
               </Button>
             </div>
           </div>
@@ -145,42 +119,6 @@ export default function Portfolio() {
                   </span>
                 </div>
               </div>
-              
-              {/* <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">Full-Stack Developer</h3>
-                  <p className="text-gray-600">InnovateLab Inc.</p>
-                </div>
-                <div className="mt-2 sm:mt-0">
-                  <span className="text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full">
-                    2020 - 2022
-                  </span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">Frontend Developer</h3>
-                  <p className="text-gray-600">StartupHub</p>
-                </div>
-                <div className="mt-2 sm:mt-0">
-                  <span className="text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full">
-                    2019 - 2020
-                  </span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">Junior Web Developer</h3>
-                  <p className="text-gray-600">Digital Agency Pro</p>
-                </div>
-                <div className="mt-2 sm:mt-0">
-                  <span className="text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full">
-                    2018 - 2019
-                  </span>
-                </div>
-              </div> */}
             </div>
           </div>
 
@@ -190,14 +128,14 @@ export default function Portfolio() {
               Project Highlights
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+              {/* <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Enterprise CRM Platform</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Built a comprehensive customer management system serving 10,000+ users with advanced analytics and automation.
                 </p>
               </div>
-              
-              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+               */}
+              {/* <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Real-time Trading Dashboard</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Developed a high-performance financial platform processing millions of transactions with real-time data visualization.
@@ -230,17 +168,17 @@ export default function Portfolio() {
                 <p className="text-gray-600 leading-relaxed">
                   Launched a progressive web app with seamless payment integration and inventory management for retail clients.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
           {/* Call to Action */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <Button size="lg" className="bg-gray-900 hover:bg-gray-800">
               <Mail className="mr-2 h-4 w-4" />
               Get In Touch
             </Button>
-          </div>
+          </div> */}
         </div>
       </section>
 
