@@ -1,11 +1,17 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import url('https://fastly.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css');
+
+@font-face {
+    font-family: 'Freesentation-9Black';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
 
 @custom-variant dark (&:is(.dark *));
 
 html {
-  font-family: var(--font-sans);
+  font-family: 'Freesentation-9Black', sans-serif;
   scroll-behavior: smooth;
 }
 
