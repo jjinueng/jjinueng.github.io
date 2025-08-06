@@ -78,7 +78,7 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold text-gray-900">
-              Alex Johnson
+              Kim Jiyoon
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
@@ -113,15 +113,15 @@ export default function Portfolio() {
           <div className="text-center mb-16">
             <div className="mb-8">
               <Image
-                src="/professional-headshot.png"
-                alt="Alex Johnson"
+                src="https://avatars.githubusercontent.com/u/115696442?v=4"
+                alt="Kim Jiyoon"
                 width={150}
                 height={150}
                 className="rounded-full mx-auto mb-6 border-4 border-gray-100"
               />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Alex Johnson
+              Kim Jiyoon
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
               Full-stack developer passionate about creating scalable web applications and solving complex technical challenges.
@@ -136,17 +136,17 @@ export default function Portfolio() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">Senior Full-Stack Developer</h3>
-                  <p className="text-gray-600">TechCorp Solutions</p>
+                  <h3 className="text-lg font-semibold text-gray-900">Full-Stack Developer</h3>
+                  <p className="text-gray-600">Heliosen</p>
                 </div>
                 <div className="mt-2 sm:mt-0">
                   <span className="text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full">
-                    2022 - Present
+                    2024 - Present
                   </span>
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+              {/* <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">Full-Stack Developer</h3>
                   <p className="text-gray-600">InnovateLab Inc.</p>
@@ -180,7 +180,7 @@ export default function Portfolio() {
                     2018 - 2019
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -381,7 +381,7 @@ export default function Portfolio() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <p className="text-gray-400">
-                © 2024 Alex Johnson. All rights reserved.
+                © 2025 jjinueng. All rights reserved.
               </p>
             </div>
             <div className="flex space-x-6">
