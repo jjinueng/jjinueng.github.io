@@ -671,6 +671,7 @@ export default function Portfolio() {
                         fill
                         className="object-cover object-center"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                     </div>
                   )}
                   <CardContent className="p-8">
