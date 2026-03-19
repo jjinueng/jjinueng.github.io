@@ -449,13 +449,13 @@ export default function Portfolio() {
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
-                소개
+                About
               </a>
               <a href="#projects" className="text-gray-600 hover:text-gray-900 transition-colors">
-                프로젝트
+                Projects
               </a>
               <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">
-                연락처
+                Contact
               </a>
             </nav>
             <div className="flex items-center space-x-4">
@@ -487,14 +487,17 @@ export default function Portfolio() {
             <div className="mb-8">
               <Image
                 src="https://avatars.githubusercontent.com/u/115696442?v=4"
-                alt="Kim Jiyoon"
+                alt="김지윤"
                 width={150}
                 height={150}
                 className="rounded-full mx-auto mb-6 border-4 border-gray-100"
               />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Kim Jiyoon
+            <p className="text-sm md:text-base text-gray-500 font-medium tracking-wide mb-3">
+              문제를 끝까지 해결하는 풀스택 개발자
+            </p>
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              김지윤
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
               나다.
@@ -509,7 +512,7 @@ export default function Portfolio() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">풀스택 개발자</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Full Stack Developer</h3>
                   <p className="text-gray-600">Heliosen</p>
                 </div>
                 <div className="mt-2 sm:mt-0">
