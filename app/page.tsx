@@ -24,6 +24,8 @@ type ProjectDetailSection = {
 type CompanyProject = {
   id: number
   title: string
+  period: string
+  periodStart: string
   description: string
   tags: string[]
   thumbnail?: string
@@ -50,6 +52,8 @@ const companyProjects: CompanyProject[] = [
   {
     id: 1,
     title: "DiTAP JS",
+    period: "2025.01 - 2025.04",
+    periodStart: "2025-01",
     description: "2D/3D 지도 뷰어의 사용성과 분석 기능을 강화하기 위한 UI/기능 개선, 품질 정비를 수행했습니다.",
     tags: ["JavaScript"],
     thumbnail: "/projects/ditap-js/thumbnail.png",
@@ -150,6 +154,8 @@ const companyProjects: CompanyProject[] = [
   {
     id: 2,
     title: "농식품 팜맵 서비스",
+    period: "2025.05 - 현재",
+    periodStart: "2025-05",
     description: "운영/사용자 기능 확장과 모바일·웹 공통 기능 안정화를 위한 개발과 품질 정비를 수행했습니다.",
     tags: ["Java", "JSP", "Oracle", "PostgreSQL"],
     thumbnail: "/projects/farmmap-service/thumbnail.png",
@@ -240,6 +246,8 @@ const companyProjects: CompanyProject[] = [
   {
     id: 3,
     title: "포항 AI 인파 플랫폼",
+    period: "2024.08 - 2024.12",
+    periodStart: "2024-08",
     description: "지도 기반 모니터링 기능부터 운영/분석 기능, 테스트 및 문서화까지 전반을 담당했습니다.",
     tags: ["Spring", "Next.js", "TypeScript", "PostgreSQL"],
     thumbnail: "/projects/pohang-ai-crowd/thumbnail.png",
@@ -329,6 +337,7 @@ const companyProjects: CompanyProject[] = [
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<CompanyProject | null>(null)
+  const sortedCompanyProjects = [...companyProjects].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
 
   return (
     <div className="min-h-screen bg-white">
@@ -420,47 +429,12 @@ export default function Portfolio() {
               Project Highlights
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Enterprise CRM Platform</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Built a comprehensive customer management system serving 10,000+ users with advanced analytics and automation.
-                </p>
-              </div>
-               */}
-              {/* <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Real-time Trading Dashboard</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Developed a high-performance financial platform processing millions of transactions with real-time data visualization.
-                </p>
-              </div>
-              
-              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Healthcare Management System</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Architected a HIPAA-compliant platform connecting patients and providers with secure telemedicine capabilities.
-                </p>
-              </div>
-              
-              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">E-Learning Platform</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Created a scalable LMS supporting 50,000+ students with interactive courses and certification programs.
-                </p>
-              </div>
-              
-              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">AI-Powered Analytics Tool</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Integrated machine learning algorithms to provide predictive insights and automated reporting for business intelligence.
-                </p>
-              </div>
-              
-              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Mobile-First E-Commerce App</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Launched a progressive web app with seamless payment integration and inventory management for retail clients.
-                </p>
-              </div> */}
+              {sortedCompanyProjects.map((project) => (
+                <div key={project.id} className="p-6 border border-gray-200 rounded-lg bg-gray-50">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{project.period}</p>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -557,7 +531,7 @@ export default function Portfolio() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {companyProjects.map((project) => (
+              {sortedCompanyProjects.map((project) => (
                 <Card 
                   key={project.id} 
                   className="group border-0 shadow-sm hover:shadow-xl transition-all duration-500 bg-white rounded-2xl overflow-hidden cursor-pointer"
@@ -578,7 +552,10 @@ export default function Portfolio() {
                       <h4 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors duration-300">
                         {project.title}
                       </h4>
-                      <p className="text-gray-600 leading-relaxed text-lg mb-6 flex-grow">
+                      <p className="text-gray-600 text-sm mb-2">
+                        {project.period}
+                      </p>
+                      <p className="text-gray-600 leading-relaxed text-base mb-2">
                         {project.description}
                       </p>
                       <div className="flex flex-wrap gap-2 mt-auto">
