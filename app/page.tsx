@@ -49,8 +49,8 @@ const personalProjects: PersonalProject[] = [
   {
     id: 1,
     title: "나눠나눠",
-    period: "2025.01 - 2025.01",
-    periodStart: "2025-01",
+    period: "2026.01 - 2026.01",
+    periodStart: "2026-01",
     description: "모임별 1차/2차/3차 금액과 참여자를 입력하면 각자 부담액을 계산해주는 정산 서비스입니다.",
     tags: ["Next.js"],
     thumbnail: "/projects/nanonano/thumbnail.png",
@@ -494,14 +494,11 @@ export default function Portfolio() {
               />
             </div>
             <p className="text-sm md:text-base text-gray-500 font-medium tracking-wide mb-3">
-              문제를 끝까지 해결하는 풀스택 개발자
+              AI를 활용해 빠르게 개발하고, 품질을 높이는 풀스택 개발자
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
               김지윤
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
-              나다.
-            </p>
           </div>
 
           {/* Work Experience */}
