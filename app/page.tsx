@@ -590,6 +590,39 @@ export default function Portfolio() {
                         fill
                         className="object-cover object-center"
                       />
+                      {(project.github || project.demo) && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                          <div className="absolute bottom-4 right-4 flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                            {project.github && (
+                              <Button
+                                size="sm"
+                                className="h-8 px-3 bg-white/90 text-gray-900 hover:bg-white"
+                                asChild
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                  <Github className="h-4 w-4 mr-1" />
+                                  Code
+                                </a>
+                              </Button>
+                            )}
+                            {project.demo && (
+                              <Button
+                                size="sm"
+                                className="h-8 px-3 bg-blue-600 hover:bg-blue-700 text-white"
+                                asChild
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="h-4 w-4 mr-1" />
+                                  Live Demo
+                                </a>
+                              </Button>
+                            )}
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
                   <CardContent className="p-8">
@@ -599,37 +632,6 @@ export default function Portfolio() {
                       </h4>
                       <p className="text-gray-600 text-sm mb-2">{project.period}</p>
                       <p className="text-gray-600 leading-relaxed text-base mb-2">{project.description}</p>
-                      {(project.github || project.demo) && (
-                        <div className="flex gap-2 mb-4">
-                          {project.github && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-8 px-3"
-                              asChild
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                <Github className="h-4 w-4 mr-1" />
-                                코드
-                              </a>
-                            </Button>
-                          )}
-                          {project.demo && (
-                            <Button
-                              size="sm"
-                              className="h-8 px-3 bg-blue-600 hover:bg-blue-700 text-white"
-                              asChild
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-4 w-4 mr-1" />
-                                데모
-                              </a>
-                            </Button>
-                          )}
-                        </div>
-                      )}
                       <div className="flex flex-wrap gap-2 mt-auto">
                         {project.tags.map((tag) => (
                           <Badge key={tag} variant="outline" className="text-sm px-3 py-1 border-gray-300 text-gray-600 hover:border-gray-400 transition-colors">
