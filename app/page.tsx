@@ -574,7 +574,7 @@ export default function Portfolio() {
             {/* Project Detail Dialog */}
             {selectedProject && (
               <Dialog open={true} onOpenChange={(open) => !open && setSelectedProject(null)}>
-                <DialogContent className="!max-w-[66.67vw] w-full max-h-[90vh] overflow-y-auto">
+                <DialogContent className="!max-w-[95vw] md:!max-w-[66.67vw] w-full max-h-[90vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6">
                   <DialogHeader>
                     <DialogTitle className="text-3xl font-bold text-gray-900 mb-2">
                       {selectedProject.title}
@@ -592,7 +592,7 @@ export default function Portfolio() {
                     {selectedProject.overview && (
                       <section className="rounded-xl border border-gray-200 bg-gray-50 p-5">
                         <h3 className="text-lg font-semibold text-gray-900 mb-3">프로젝트 개요</h3>
-                        <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                        <p className="text-gray-700 leading-relaxed whitespace-pre-line break-words">
                           {selectedProject.overview}
                         </p>
                       </section>
@@ -622,7 +622,7 @@ export default function Portfolio() {
                         <h3 className="text-lg font-semibold text-gray-900 mb-3">핵심 키워드</h3>
                         <div className="flex flex-wrap gap-2">
                           {selectedProject.keywords.map((keyword) => (
-                            <Badge key={keyword} variant="outline" className="text-sm px-3 py-1">
+                            <Badge key={keyword} variant="outline" className="text-sm px-3 py-1 whitespace-normal break-words">
                               {keyword}
                             </Badge>
                           ))}
@@ -638,13 +638,13 @@ export default function Portfolio() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                               <div className="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
                                 <p className="text-sm font-semibold text-rose-700 mb-2">문제</p>
-                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line break-words">
                                   {section.problem}
                                 </p>
                               </div>
                               <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
                                 <p className="text-sm font-semibold text-blue-700 mb-2">해결</p>
-                                <ul className="list-disc pl-4 space-y-1 text-sm text-gray-700 leading-relaxed">
+                                <ul className="list-disc pl-4 space-y-1 text-sm text-gray-700 leading-relaxed break-words">
                                   {section.solutions.map((solution) => (
                                     <li key={solution}>{solution}</li>
                                   ))}
@@ -652,7 +652,7 @@ export default function Portfolio() {
                               </div>
                               <div className="rounded-lg border border-emerald-100 bg-emerald-50/70 p-4">
                                 <p className="text-sm font-semibold text-emerald-700 mb-2">성과</p>
-                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line break-words">
                                   {section.result}
                                 </p>
                               </div>
