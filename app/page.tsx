@@ -21,7 +21,7 @@ type ProjectDetailSection = {
   result: string
 }
 
-type CompanyProject = {
+type BaseProject = {
   id: number
   title: string
   period: string
@@ -36,15 +36,109 @@ type CompanyProject = {
   items?: ProjectItem[]
 }
 
-const personalProjects = [
+type PersonalProject = BaseProject & {
+  github?: string
+  demo?: string
+}
+
+type CompanyProject = BaseProject
+
+type PortfolioProject = PersonalProject | CompanyProject
+
+const personalProjects: PersonalProject[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "-",
-    image: "/modern-ecommerce-interface.png",
-    tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-    github: "https://github.com/jjinueng/modern-ecommerce-interface",
-    demo: "https://ecommerce-demo.vercel.app"
+    title: "나눠나눠",
+    period: "2025.01 - 2025.01",
+    periodStart: "2025-01",
+    description: "모임별 1차/2차/3차 금액과 참여자를 입력하면 각자 부담액을 계산해주는 정산 서비스입니다.",
+    tags: ["Next.js"],
+    thumbnail: "/projects/nanonano/thumbnail.png",
+    detailImages: [
+      "/projects/nanonano/detail-01.png",
+      "/projects/nanonano/detail-02.png",
+      "/projects/nanonano/detail-03.png",
+      "/projects/nanonano/detail-04.png",
+    ],
+    github: "https://github.com/jn-time-capsule/nanonano-frontend",
+    demo: "https://jntimecapsule.cloud/nanonano",
+    overview:
+      "개인 프로젝트 나눠나눠는 모임별로 1차/2차/3차 금액과 참여자를 입력하면 각자 부담액을 계산해주는 정산 서비스입니다. 프론트엔드에서 기본 UI를 구현하고, 사용 흐름에 맞춰 정산/모임/공유/로그인 관련 API를 연동해 기능을 완성했습니다.",
+    keywords: [
+      "프론트엔드 중심 UI 구현 + API 연동",
+      "정산 CRUD(조회/수정/메모) + 정산 완료 처리",
+      "모임 관리(목록/삭제) + 계산 결과 저장",
+      "공유 링크 기능, 소셜 로그인, 프로필 UI 개선",
+    ],
+    detailSections: [
+      {
+        title: "담당 업무 1) 기본 화면/핵심 사용 흐름(UI) 구현",
+        problem:
+          "사용자가 로그인 여부와 관계없이 정산 계산을 바로 시작할 수 있어야 하고, 로그인 후에는 모임/공유 등 확장 기능을 자연스럽게 이어서 사용할 수 있어야 했습니다.",
+        solutions: [
+          "서비스의 기본 UI 및 핵심 기능 흐름을 구현했습니다.",
+          "새 모임 만들기, 공유 링크 열기, 로그인 등 랜딩 화면에서 주요 CTA가 보이도록 구성했습니다.",
+        ],
+        result:
+          "초기 진입 시 사용자가 기능을 빠르게 이해하고, 로그인 전후 사용 경험이 끊기지 않는 기본 구조를 만들었습니다.",
+      },
+      {
+        title: "담당 업무 2) 정산 데이터 입력/조회/수정 API 연동(정산 UX 완성)",
+        problem:
+          "정산 서비스는 입력한 데이터를 기반으로 계산이 이루어지므로, 정산 내용이 저장되고 필요 시 조회/수정/메모 기록까지 이어져야 사용성이 확보됩니다.",
+        solutions: [
+          "정산 내용 조회 API를 연결했습니다.",
+          "정산 내용 수정 API를 연결했습니다.",
+          "정산 내용 메모 추가 기능을 반영했습니다.",
+          "송금/정산완료 API를 연결했습니다.",
+        ],
+        result:
+          "정산이 계산만 되는 기능이 아니라, 기록·관리·완료 처리까지 가능한 사용자 흐름으로 완성되었습니다.",
+      },
+      {
+        title: "담당 업무 3) 계산 결과 저장 및 모임 단위 데이터 관리 API 연동",
+        problem:
+          "모임 기반 서비스에서는 계산 결과가 누적되고 모임 목록이 관리되어야 재방문 시에도 가치를 제공합니다.",
+        solutions: [
+          "계산 결과 저장 API를 연결했습니다.",
+          "모임 목록 조회 API를 연결했습니다.",
+          "모임 삭제 API를 연결했습니다.",
+        ],
+        result:
+          "사용자가 모임 단위로 정산 결과를 관리하고, 불필요한 모임 정리까지 가능한 운영 흐름을 구성했습니다.",
+      },
+      {
+        title: "담당 업무 4) 공유 링크 기능(API 연동)으로 공유/재접근성 강화",
+        problem:
+          "정산 결과는 참여자들과 공유되는 경우가 많아서, 링크 기반 접근이 가능해야 사용성이 크게 좋아집니다.",
+        solutions: ["공유 링크 조회 API를 연결했습니다."],
+        result:
+          "로그인 후 공유 링크를 통해 모임/정산 정보를 다시 열람할 수 있는 공유 흐름을 만들었습니다.",
+      },
+      {
+        title: "담당 업무 5) 소셜 로그인 및 프로필 UX 개선",
+        problem:
+          "개인 서비스는 가입 장벽이 높으면 이탈이 커서, 로그인 경험이 간단해야 했습니다.",
+        solutions: [
+          "소셜 로그인 API를 연결했습니다.",
+          "구글 프로필 사진 추가로 사용자 식별 UI를 개선했습니다.",
+        ],
+        result:
+          "로그인 진입 장벽을 낮추고, 로그인 상태에서 사용자 정보가 자연스럽게 보이도록 경험을 개선했습니다.",
+      },
+      {
+        title: "품질/마무리) 배포 경로 및 문서 정리",
+        problem:
+          "개발 결과를 실제 사용 가능한 형태로 배포하고, 이후에도 참고 가능한 문서화가 필요했습니다.",
+        solutions: [
+          "서비스 경로를 /nananonano로 변경해 배포 URL을 정리했습니다.",
+          "프로젝트 README 작성을 진행했습니다.",
+          "개인 프로젝트 생성 및 작업 단위 정리를 진행했습니다.",
+        ],
+        result:
+          "개발 결과를 배포/공유 가능한 형태로 정리하고, 문서로 맥락을 남길 수 있게 했습니다.",
+      },
+    ],
   },
 ]
 
@@ -336,8 +430,13 @@ const companyProjects: CompanyProject[] = [
 ]
 
 export default function Portfolio() {
-  const [selectedProject, setSelectedProject] = useState<CompanyProject | null>(null)
+  const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null)
+  const sortedPersonalProjects = [...personalProjects].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
   const sortedCompanyProjects = [...companyProjects].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
+  const projectHighlights = [
+    ...sortedPersonalProjects.map((project) => ({ ...project, projectType: "개인 프로젝트" })),
+    ...sortedCompanyProjects.map((project) => ({ ...project, projectType: "회사 프로젝트" })),
+  ].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
 
   return (
     <div className="min-h-screen bg-white">
@@ -350,13 +449,13 @@ export default function Portfolio() {
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
-                About
+                소개
               </a>
               <a href="#projects" className="text-gray-600 hover:text-gray-900 transition-colors">
-                Projects
+                프로젝트
               </a>
               <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">
-                Contact
+                연락처
               </a>
             </nav>
             <div className="flex items-center space-x-4">
@@ -405,17 +504,17 @@ export default function Portfolio() {
           {/* Work Experience */}
           <div className="mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              Work Experience
+              경력
             </h2>
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">Full-Stack Developer</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">풀스택 개발자</h3>
                   <p className="text-gray-600">Heliosen</p>
                 </div>
                 <div className="mt-2 sm:mt-0">
                   <span className="text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full">
-                    2024 - Present
+                    2024 - 현재
                   </span>
                 </div>
               </div>
@@ -426,11 +525,14 @@ export default function Portfolio() {
           {/* Project Highlights */}
           <div className="mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              Project Highlights
+              프로젝트 하이라이트
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {sortedCompanyProjects.map((project) => (
-                <div key={project.id} className="p-6 border border-gray-200 rounded-lg bg-gray-50">
+              {projectHighlights.map((project) => (
+                <div key={`${project.projectType}-${project.id}`} className="p-6 border border-gray-200 rounded-lg bg-gray-50">
+                  <Badge variant="outline" className="mb-3 text-xs">
+                    {project.projectType}
+                  </Badge>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{project.period}</p>
                 </div>
@@ -453,11 +555,10 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              Featured Work
+              주요 프로젝트
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              A showcase of personal projects and professional contributions that demonstrate 
-              my expertise in modern web development.
+              개인 프로젝트와 실무 프로젝트를 통해 수행한 작업을 소개합니다.
             </p>
           </div>
 
@@ -466,53 +567,73 @@ export default function Portfolio() {
             <div className="flex items-center mb-12">
               <div className="flex-grow h-px bg-gray-200"></div>
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 px-8 tracking-tight">
-                Personal Projects
+                개인 프로젝트
               </h3>
               <div className="flex-grow h-px bg-gray-200"></div>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {personalProjects.map((project) => (
-                <Card key={project.id} className="group overflow-hidden border-0 shadow-sm hover:shadow-2xl transition-all duration-500 bg-white rounded-2xl">
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      width={600}
-                      height={400}
-                      className="w-full h-64 object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute bottom-6 left-6 right-6 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="flex space-x-3">
-                        <Button size="sm" className="bg-white/90 text-gray-900 hover:bg-white backdrop-blur-sm" asChild>
-                          <a href={project.github} target="_blank" rel="noopener noreferrer">
-                            <Github className="h-4 w-4 mr-2" />
-                            Code
-                          </a>
-                        </Button>
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" asChild>
-                          <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            Live Demo
-                          </a>
-                        </Button>
-                      </div>
+              {sortedPersonalProjects.map((project) => (
+                <Card
+                  key={project.id}
+                  className="group border-0 shadow-sm hover:shadow-xl transition-all duration-500 bg-white rounded-2xl overflow-hidden cursor-pointer"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  {project.thumbnail && (
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={project.thumbnail}
+                        alt={`${project.title} 썸네일`}
+                        fill
+                        className="object-cover object-center"
+                      />
                     </div>
-                  </div>
+                  )}
                   <CardContent className="p-8">
-                    <h4 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                      {project.title}
-                    </h4>
-                    <p className="text-gray-600 mb-6 leading-relaxed text-lg">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-sm px-3 py-1 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
-                          {tag}
-                        </Badge>
-                      ))}
+                    <div className="flex flex-col h-full">
+                      <h4 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors duration-300">
+                        {project.title}
+                      </h4>
+                      <p className="text-gray-600 text-sm mb-2">{project.period}</p>
+                      <p className="text-gray-600 leading-relaxed text-base mb-2">{project.description}</p>
+                      {(project.github || project.demo) && (
+                        <div className="flex gap-2 mb-4">
+                          {project.github && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 px-3"
+                              asChild
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                <Github className="h-4 w-4 mr-1" />
+                                코드
+                              </a>
+                            </Button>
+                          )}
+                          {project.demo && (
+                            <Button
+                              size="sm"
+                              className="h-8 px-3 bg-blue-600 hover:bg-blue-700 text-white"
+                              asChild
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="h-4 w-4 mr-1" />
+                                데모
+                              </a>
+                            </Button>
+                          )}
+                        </div>
+                      )}
+                      <div className="flex flex-wrap gap-2 mt-auto">
+                        {project.tags.map((tag) => (
+                          <Badge key={tag} variant="outline" className="text-sm px-3 py-1 border-gray-300 text-gray-600 hover:border-gray-400 transition-colors">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -525,7 +646,7 @@ export default function Portfolio() {
             <div className="flex items-center mb-12">
               <div className="flex-grow h-px bg-gray-200"></div>
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 px-8 tracking-tight">
-                Company Projects
+                회사 프로젝트
               </h3>
               <div className="flex-grow h-px bg-gray-200"></div>
             </div>
@@ -716,7 +837,7 @@ export default function Portfolio() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <p className="text-gray-400">
-                © 2025 jjinueng. All rights reserved.
+                © 2025 jjinueng. 모든 권리 보유.
               </p>
             </div>
             <div className="flex space-x-6">
