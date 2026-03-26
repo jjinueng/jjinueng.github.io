@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Github, ExternalLink, Linkedin, Earth } from 'lucide-react'
+import { Github, ExternalLink, Linkedin, Earth, Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 type ProjectItem = {
   role: string
@@ -431,6 +432,9 @@ const companyProjects: CompanyProject[] = [
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null)
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const sortedPersonalProjects = [...personalProjects].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
   const sortedCompanyProjects = [...companyProjects].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
   const projectHighlights = [
@@ -439,144 +443,135 @@ export default function Portfolio() {
   ].sort((a, b) => b.periodStart.localeCompare(a.periodStart))
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="text-2xl font-bold text-gray-900">
-              JJINUENG.DEV
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
-                About
+    <div className="min-h-screen bg-background text-foreground">
+
+      {/* ── Header ── */}
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between h-14">
+          <span className="text-[#00C8FF] text-[12px] tracking-widest font-bold">JJINUENG.DEV</span>
+          <nav className="hidden md:flex gap-8">
+            {["about","projects","contact"].map(id => (
+              <a key={id} href={`#${id}`}
+                className="text-[12px] text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider">
+                {id}
               </a>
-              <a href="#projects" className="text-gray-600 hover:text-gray-900 transition-colors">
-                Projects
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild>
+              <a href="https://github.com/jjinueng" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4" />
               </a>
-              <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">
-                Contact
+            </Button>
+            <Button variant="ghost" size="icon" asChild>
+              <a href="https://jjinueng.tistory.com/" target="_blank" rel="noopener noreferrer">
+                <Earth className="h-4 w-4" />
               </a>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon" asChild>
-                <a href="https://github.com/jjinueng" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <a href="https://linkedin.com/in/jjinueng" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <a href="https://jjinueng.tistory.com/" target="_blank" rel="noopener noreferrer">
-                  <Earth className="h-5 w-5" />
-                </a>
-              </Button>
-            </div>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              aria-label="테마 전환"
+            >
+              {mounted && (theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />)}
+            </Button>
           </div>
         </div>
       </header>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Profile Image and Introduction */}
-          <div className="text-center mb-16">
-            <div className="mb-8">
+      {/* ── About ── */}
+      <section id="about" className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+
+          {/* Hero */}
+          <div className="flex flex-col items-center text-center mb-20">
+            <div className="mb-6 relative">
+              <div className="absolute inset-0 rounded-full bg-[#00C8FF]/10 blur-xl scale-110" />
               <Image
                 src="https://avatars.githubusercontent.com/u/115696442?v=4"
                 alt="김지윤"
-                width={150}
-                height={150}
-                className="rounded-full mx-auto mb-6 border-4 border-gray-100"
+                width={96}
+                height={96}
+                className="rounded-full relative border-2 border-[#00C8FF]/30"
               />
             </div>
-            <p className="text-sm md:text-base text-gray-500 font-medium tracking-wide mb-3">
-              AI를 활용해 빠르게 개발하고, 품질을 높이는 풀스택 개발자
+            <p className="text-[12px] text-muted-foreground tracking-widest uppercase mb-3">
+              Full-Stack Developer
             </p>
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-[36px] text-foreground mb-4 leading-tight">
               김지윤
             </h1>
+            <p className="text-[12px] text-muted-foreground max-w-md leading-relaxed">
+              AI를 활용해 빠르게 개발하고, 품질을 높이는 풀스택 개발자.<br/><br/>
+              기능 구현에 그치지 않고,<br/>
+              왜 이 구조를 선택했는지 설명할 수 있는 코드를 지향합니다.
+            </p>
           </div>
 
-          {/* Work Experience */}
-          <div className="mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              경력
-            </h2>
-            <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">Full Stack Developer</h3>
-                  <p className="text-gray-600">Heliosen</p>
+          {/* Experience */}
+          <div className="mb-20">
+            <h2 className="text-[12px] text-muted-foreground tracking-widest uppercase mb-6">경력</h2>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-5 rounded-lg bg-card border border-border hover:border-[#00C8FF]/30 transition-colors">
+                <div>
+                  <p className="text-[12px] text-foreground mb-1">Full-Stack Developer</p>
+                  <p className="text-[12px] text-muted-foreground">Heliosen</p>
                 </div>
-                <div className="mt-2 sm:mt-0">
-                  <span className="text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full">
-                    2024 - 현재
-                  </span>
-                </div>
+                <span className="text-[12px] text-[#00C8FF]/70">2024 — 현재</span>
               </div>
-              
+              <div className="flex items-center justify-between p-5 rounded-lg bg-card border border-border hover:border-[#00C8FF]/30 transition-colors">
+                <div>
+                  <p className="text-[12px] text-foreground mb-1">9roomthon Training</p>
+                  <p className="text-[12px] text-muted-foreground">Full-Stack Developer</p>
+                </div>
+                <span className="text-[12px] text-muted-foreground">2023.11 — 2024.02</span>
+              </div>
             </div>
           </div>
 
           {/* Project Highlights */}
-          <div className="mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              프로젝트 하이라이트
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h2 className="text-[12px] text-muted-foreground tracking-widest uppercase mb-6">프로젝트 하이라이트</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {projectHighlights.map((project) => (
-                <div key={`${project.projectType}-${project.id}`} className="p-6 border border-gray-200 rounded-lg bg-gray-50">
-                  <Badge variant="outline" className="mb-3 text-xs">
-                    {project.projectType}
-                  </Badge>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{project.period}</p>
+                <div
+                  key={`${project.projectType}-${project.id}`}
+                  className="p-4 rounded-lg bg-card border border-border hover:border-[#00C8FF]/30 transition-colors cursor-pointer"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <p className="text-[12px] text-[#00C8FF]/60 mb-2">{project.projectType}</p>
+                  <p className="text-[12px] text-foreground mb-1">{project.title}</p>
+                  <p className="text-[12px] text-muted-foreground">{project.period}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Call to Action */}
-          {/* <div className="text-center">
-            <Button size="lg" className="bg-gray-900 hover:bg-gray-800">
-              <Mail className="mr-2 h-4 w-4" />
-              Get In Touch
-            </Button>
-          </div> */}
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              주요 프로젝트
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      {/* ── Projects ── */}
+      <section id="projects" className="py-24 px-6 border-t border-border">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-[24px] text-foreground mb-3">주요 프로젝트</h2>
+            <p className="text-[12px] text-muted-foreground">
               개인 프로젝트와 실무 프로젝트를 통해 수행한 작업을 소개합니다.
             </p>
           </div>
 
           {/* Personal Projects */}
-          <div className="mb-20">
-            <div className="flex items-center mb-12">
-              <div className="flex-grow h-px bg-gray-200"></div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 px-8 tracking-tight">
-                개인 프로젝트
-              </h3>
-              <div className="flex-grow h-px bg-gray-200"></div>
+          <div className="mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px flex-1 bg-border" />
+              <span className="text-[12px] text-muted-foreground tracking-widest uppercase">개인 프로젝트</span>
+              <div className="h-px flex-1 bg-border" />
             </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {sortedPersonalProjects.map((project) => (
                 <Card
                   key={project.id}
-                  className="group border-0 shadow-sm hover:shadow-xl transition-all duration-500 bg-white rounded-2xl overflow-hidden cursor-pointer"
+                  className="group bg-card border border-border hover:border-[#00C8FF]/40 transition-all duration-300 rounded-xl overflow-hidden cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
                   {project.thumbnail && (
@@ -585,57 +580,41 @@ export default function Portfolio() {
                         src={project.thumbnail}
                         alt={`${project.title} 썸네일`}
                         fill
-                        className="object-cover object-center"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                       {(project.github || project.demo) && (
-                        <>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                          <div className="absolute bottom-4 right-4 flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
-                            {project.github && (
-                              <Button
-                                size="sm"
-                                className="h-8 px-3 bg-white/90 text-gray-900 hover:bg-white"
-                                asChild
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                  <Github className="h-4 w-4 mr-1" />
-                                  Code
-                                </a>
-                              </Button>
-                            )}
-                            {project.demo && (
-                              <Button
-                                size="sm"
-                                className="h-8 px-3 bg-blue-600 hover:bg-blue-700 text-white"
-                                asChild
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="h-4 w-4 mr-1" />
-                                  Live Demo
-                                </a>
-                              </Button>
-                            )}
-                          </div>
-                        </>
+                        <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          {project.github && (
+                            <Button size="sm" className="h-7 px-3 bg-background/90 text-foreground hover:bg-background text-[12px]" asChild onClick={(e) => e.stopPropagation()}>
+                              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                <Github className="h-3 w-3 mr-1" /> Code
+                              </a>
+                            </Button>
+                          )}
+                          {project.demo && (
+                            <Button size="sm" className="h-7 px-3 bg-[#00C8FF] text-background hover:bg-[#00C8FF]/90 text-[12px]" asChild onClick={(e) => e.stopPropagation()}>
+                              <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="h-3 w-3 mr-1" /> Demo
+                              </a>
+                            </Button>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}
-                  <CardContent className="p-8">
-                    <div className="flex flex-col h-full">
-                      <h4 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors duration-300">
-                        {project.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm mb-2">{project.period}</p>
-                      <p className="text-gray-600 leading-relaxed text-base mb-2">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mt-auto">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-sm px-3 py-1 border-gray-300 text-gray-600 hover:border-gray-400 transition-colors">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
+                  <CardContent className="p-6">
+                    <h4 className="text-[14px] text-foreground mb-2 group-hover:text-[#00C8FF] transition-colors duration-300">
+                      {project.title}
+                    </h4>
+                    <p className="text-[12px] text-muted-foreground mb-3">{project.period}</p>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="text-[12px] px-2 py-0.5 border-border text-muted-foreground">
+                          {tag}
+                        </Badge>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
@@ -645,19 +624,16 @@ export default function Portfolio() {
 
           {/* Company Projects */}
           <div>
-            <div className="flex items-center mb-12">
-              <div className="flex-grow h-px bg-gray-200"></div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 px-8 tracking-tight">
-                회사 프로젝트
-              </h3>
-              <div className="flex-grow h-px bg-gray-200"></div>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px flex-1 bg-border" />
+              <span className="text-[12px] text-muted-foreground tracking-widest uppercase">회사 프로젝트</span>
+              <div className="h-px flex-1 bg-border" />
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {sortedCompanyProjects.map((project) => (
-                <Card 
-                  key={project.id} 
-                  className="group border-0 shadow-sm hover:shadow-xl transition-all duration-500 bg-white rounded-2xl overflow-hidden cursor-pointer"
+                <Card
+                  key={project.id}
+                  className="group bg-card border border-border hover:border-[#00C8FF]/40 transition-all duration-300 rounded-xl overflow-hidden cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
                   {project.thumbnail && (
@@ -666,57 +642,52 @@ export default function Portfolio() {
                         src={project.thumbnail}
                         alt={`${project.title} 썸네일`}
                         fill
-                        className="object-cover object-center"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     </div>
                   )}
-                  <CardContent className="p-8">
-                    <div className="flex flex-col h-full">
-                      <h4 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors duration-300">
-                        {project.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm mb-2">
-                        {project.period}
-                      </p>
-                      <p className="text-gray-600 leading-relaxed text-base mb-2">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-auto">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-sm px-3 py-1 border-gray-300 text-gray-600 hover:border-gray-400 transition-colors">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
+                  <CardContent className="p-6">
+                    <h4 className="text-[14px] text-foreground mb-2 group-hover:text-[#00C8FF] transition-colors duration-300">
+                      {project.title}
+                    </h4>
+                    <p className="text-[12px] text-muted-foreground mb-3">{project.period}</p>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed mb-4 line-clamp-2">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="text-[12px] px-2 py-0.5 border-border text-muted-foreground">
+                          {tag}
+                        </Badge>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
-            
+
             {/* Project Detail Dialog */}
             {selectedProject && (
               <Dialog open={true} onOpenChange={(open) => !open && setSelectedProject(null)}>
-                <DialogContent className="!max-w-[95vw] md:!max-w-[66.67vw] w-full max-h-[90vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6">
+                <DialogContent className="!max-w-[95vw] md:!max-w-[64vw] w-full max-h-[90vh] overflow-y-auto overflow-x-hidden p-6 bg-card border-border">
                   <DialogHeader>
-                    <DialogTitle className="text-3xl font-bold text-gray-900 mb-2">
+                    <DialogTitle className="text-[24px] text-foreground mb-1">
                       {selectedProject.title}
                     </DialogTitle>
+                    <p className="text-[12px] text-muted-foreground">{selectedProject.period}</p>
                   </DialogHeader>
-                  <div className="space-y-8">
+                  <div className="space-y-6 mt-2">
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-sm px-3 py-1 bg-gray-100 text-gray-700">
+                        <Badge key={tag} variant="secondary" className="text-[12px] px-2 py-0.5">
                           {tag}
                         </Badge>
                       ))}
                     </div>
 
                     {selectedProject.overview && (
-                      <section className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">프로젝트 개요</h3>
-                        <p className="text-gray-700 leading-relaxed whitespace-pre-line break-words">
+                      <section className="rounded-lg border border-border bg-background/50 p-4">
+                        <h3 className="text-[12px] text-[#00C8FF] tracking-wider mb-3 uppercase">프로젝트 개요</h3>
+                        <p className="text-[12px] text-muted-foreground leading-relaxed whitespace-pre-line break-words">
                           {selectedProject.overview}
                         </p>
                       </section>
@@ -724,10 +695,10 @@ export default function Portfolio() {
 
                     {selectedProject.detailImages && selectedProject.detailImages.length > 0 && (
                       <section>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">예시 화면</h3>
+                        <h3 className="text-[12px] text-[#00C8FF] tracking-wider mb-3 uppercase">예시 화면</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {selectedProject.detailImages.slice(0, 4).map((imagePath, index) => (
-                            <div key={imagePath} className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
+                            <div key={imagePath} className="relative aspect-video overflow-hidden rounded-lg border border-border bg-background/50">
                               <Image
                                 src={imagePath}
                                 alt={`${selectedProject.title} 예시 화면 ${index + 1}`}
@@ -743,10 +714,10 @@ export default function Portfolio() {
 
                     {selectedProject.keywords && selectedProject.keywords.length > 0 && (
                       <section>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">핵심 키워드</h3>
+                        <h3 className="text-[12px] text-[#00C8FF] tracking-wider mb-3 uppercase">핵심 키워드</h3>
                         <div className="flex flex-wrap gap-2">
                           {selectedProject.keywords.map((keyword) => (
-                            <Badge key={keyword} variant="outline" className="text-sm px-3 py-1 whitespace-normal break-words">
+                            <Badge key={keyword} variant="outline" className="text-[12px] px-2 py-0.5 whitespace-normal break-words border-border text-muted-foreground">
                               {keyword}
                             </Badge>
                           ))}
@@ -755,28 +726,28 @@ export default function Portfolio() {
                     )}
 
                     {selectedProject.detailSections && selectedProject.detailSections.length > 0 && (
-                      <section className="space-y-5">
+                      <section className="space-y-4">
                         {selectedProject.detailSections.map((section) => (
-                          <article key={section.title} className="rounded-xl border border-gray-200 p-5">
-                            <h3 className="text-xl font-semibold text-gray-900 mb-4">{section.title}</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                              <div className="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
-                                <p className="text-sm font-semibold text-rose-700 mb-2">문제</p>
-                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line break-words">
+                          <article key={section.title} className="rounded-lg border border-border p-4">
+                            <h3 className="text-[12px] text-foreground mb-4 leading-relaxed">{section.title}</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                              <div className="rounded-lg border border-rose-400/50 bg-rose-500/10 p-3">
+                                <p className="text-[12px] text-rose-400 mb-2 tracking-wider">문제</p>
+                                <p className="text-[12px] text-muted-foreground leading-relaxed whitespace-pre-line break-words">
                                   {section.problem}
                                 </p>
                               </div>
-                              <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
-                                <p className="text-sm font-semibold text-blue-700 mb-2">해결</p>
-                                <ul className="list-disc pl-4 space-y-1 text-sm text-gray-700 leading-relaxed break-words">
+                              <div className="rounded-lg border border-blue-400/50 bg-blue-500/10 p-3">
+                                <p className="text-[12px] text-blue-400 mb-2 tracking-wider">해결</p>
+                                <ul className="list-disc pl-4 space-y-1 text-[12px] text-muted-foreground leading-relaxed break-words">
                                   {section.solutions.map((solution) => (
                                     <li key={solution}>{solution}</li>
                                   ))}
                                 </ul>
                               </div>
-                              <div className="rounded-lg border border-emerald-100 bg-emerald-50/70 p-4">
-                                <p className="text-sm font-semibold text-emerald-700 mb-2">성과</p>
-                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line break-words">
+                              <div className="rounded-lg border border-emerald-400/50 bg-emerald-500/10 p-3">
+                                <p className="text-[12px] text-emerald-400 mb-2 tracking-wider">성과</p>
+                                <p className="text-[12px] text-muted-foreground leading-relaxed whitespace-pre-line break-words">
                                   {section.result}
                                 </p>
                               </div>
@@ -789,21 +760,15 @@ export default function Portfolio() {
                     {selectedProject.items && selectedProject.items.length > 0 && (
                       <section className="space-y-4">
                         {selectedProject.items.map((item, index) => (
-                          <div key={index} className="pb-6 border-b last:border-b-0 last:pb-0">
-                            <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.role}</h3>
+                          <div key={index} className="pb-5 border-b border-border last:border-b-0 last:pb-0">
+                            <h3 className="text-[12px] text-foreground mb-3">{item.role}</h3>
                             <div className="flex flex-col md:flex-row gap-4">
                               {item.image && (
-                                <div className="relative w-full md:w-64 lg:w-80 aspect-video flex-shrink-0 rounded-lg overflow-hidden border border-gray-200">
-                                  <Image
-                                    src={item.image}
-                                    alt={item.role}
-                                    fill
-                                    className="object-cover object-center"
-                                    loading="lazy"
-                                  />
+                                <div className="relative w-full md:w-64 aspect-video flex-shrink-0 rounded-lg overflow-hidden border border-border">
+                                  <Image src={item.image} alt={item.role} fill className="object-cover" loading="lazy" />
                                 </div>
                               )}
-                              <p className="text-base text-gray-700 leading-relaxed whitespace-pre-line flex-1">
+                              <p className="text-[12px] text-muted-foreground leading-relaxed whitespace-pre-line flex-1">
                                 {item.description}
                               </p>
                             </div>
@@ -819,41 +784,40 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-
+      {/* ── Contact ── */}
+      <section id="contact" className="py-20 px-6 border-t border-border">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-[24px] text-foreground mb-3">Contact</h2>
+          <p className="text-[12px] text-muted-foreground mb-8">
+            언제든 편하게 연락 주세요.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button variant="outline" asChild className="text-[12px] border-border hover:border-[#00C8FF]/50 hover:text-[#00C8FF]">
+              <a href="https://github.com/jjinueng" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 mr-2" /> GitHub
+              </a>
+            </Button>
+            <Button variant="outline" asChild className="text-[12px] border-border hover:border-[#00C8FF]/50 hover:text-[#00C8FF]">
+              <a href="https://jjinueng.tistory.com/" target="_blank" rel="noopener noreferrer">
+                <Earth className="h-4 w-4 mr-2" /> Blog
+              </a>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <p className="text-gray-400">
-                © 2025 jjinueng. 모든 권리 보유.
-              </p>
-            </div>
-            <div className="flex space-x-6">
-              <a href="https://github.com/jjinueng" className="text-gray-400 hover:text-white transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
-              <a href="https://linkedin.com/in/jjinueng" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="https://jjinueng.tistory.com/" className="text-gray-400 hover:text-white transition-colors">
-                <Earth className="h-5 w-5" />
-              </a>
-            </div>
+      {/* ── Footer ── */}
+      <footer className="border-t border-border py-8 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+          <span className="text-[12px] text-[#00C8FF] tracking-widest">JJINUENG.DEV</span>
+          <p className="text-[12px] text-muted-foreground">© 2025 jjinueng</p>
+          <div className="flex gap-4">
+            <a href="https://github.com/jjinueng" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Github className="h-4 w-4" />
+            </a>
+            <a href="https://jjinueng.tistory.com/" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Earth className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </footer>
