@@ -603,7 +603,7 @@ export default function Portfolio() {
                   <p className="text-[12px] text-foreground mb-1">Full-Stack Developer</p>
                   <p className="text-[12px] text-muted-foreground">Heliosen</p>
                 </div>
-                <span className="text-[12px] text-[#00C8FF]/70">2024 — 현재</span>
+                <span className="text-[12px] text-[#00C8FF]/70">2024.07 — 현재</span>
               </div>
               <div className="flex items-center justify-between p-5 rounded-lg bg-card border border-border hover:border-[#00C8FF]/30 transition-colors">
                 <div>
