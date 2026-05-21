@@ -29,6 +29,7 @@ type BaseProject = {
   periodStart: string
   description: string
   tags: string[]
+  platforms?: string[]
   thumbnail?: string
   detailImages?: string[]
   overview?: string
@@ -54,6 +55,7 @@ const personalProjects: PersonalProject[] = [
     periodStart: "2026-01",
     description: "모임별 1차/2차/3차 금액과 참여자를 입력하면 각자 부담액을 계산해주는 정산 서비스입니다.",
     tags: ["Next.js"],
+    platforms: ["모바일", "PC"],
     thumbnail: "/projects/nanonano/thumbnail.png",
     detailImages: [
       "/projects/nanonano/detail-01.png",
@@ -149,6 +151,9 @@ const personalProjects: PersonalProject[] = [
     description:
       "도서 검색부터 읽기 상태 관리, 컬렉션, 문장 저장, 마이페이지 통계까지 한 곳에서 관리하는 반응형 독서 기록 웹 서비스입니다.",
     tags: ["Next.js"],
+    platforms: ["모바일", "PC"],
+    github: "https://github.com/jn-time-capsule/dokudoku-frontend",
+    demo: "https://jntimecapsule.cloud/dokudoku",
     thumbnail: "/projects/dokudoku/thumbnail.png",
     detailImages: [
       "/projects/dokudoku/detail-01.png",
@@ -226,6 +231,68 @@ const personalProjects: PersonalProject[] = [
       },
     ],
   },
+  {
+    id: 3,
+    title: "간헐적 단식 타이머",
+    period: "2026.04 - 2026.04",
+    periodStart: "2026-04",
+    description:
+      "16:8, 18:6 등 단식 모드를 선택해 단식·식사 사이클을 추적하는 앱인토스 미니앱입니다. 단계 완료 시 햅틱 피드백과 알림을 제공합니다.",
+    tags: ["React", "TypeScript", "Apps In Toss"],
+    platforms: ["모바일"],
+    github: "https://github.com/jjinueng/fasting-timer",
+    demo: "https://minion.toss.im/zqv7zx6b",
+    thumbnail: "/projects/fasting-timer/thumbnail.png",
+    detailImages: [
+      "/projects/fasting-timer/detail-01.png",
+      "/projects/fasting-timer/detail-02.png",
+    ],
+    overview:
+      "개인 프로젝트 간헐적 단식 타이머는 16:8, 18:6, 20:4, 23:1 단식 모드를 선택해 단식과 식사 사이클을 연속으로 추적하는 앱인토스 미니앱입니다. 원형 프로그레스 타이머로 남은 시간을 시각화하고, 단계 전환 시 햅틱 피드백·인앱 알림·브라우저 Web Notification을 제공합니다. 앱을 닫아도 타이머가 유지되며, 앱인토스 배너 광고를 연동했습니다.",
+    keywords: [
+      "단식·식사 사이클 자동 전환 타이머",
+      "원형 프로그레스 + 남은 시간 시각화",
+      "단계 완료 알림(햅틱·인앱 오버레이·Web Notification)",
+      "localStorage 기반 앱 종료 후 상태 복원",
+      "앱인토스 배너 광고(TossAds) 연동",
+    ],
+    detailSections: [
+      {
+        title: "담당 업무 1) 단식·식사 사이클 타이머 구현",
+        problem:
+          "단식 앱은 단식 시간과 식사 시간이 연속으로 이어져야 하므로, 단계가 끝나면 다음 단계로 자동 전환되고 중간에 앱을 닫아도 타이머가 이어져야 했습니다.",
+        solutions: [
+          "16:8, 18:6, 20:4, 23:1 프리셋 모드를 선택해 단식·식사 사이클이 자동 전환되는 타이머를 구현했습니다.",
+          "localStorage에 시작 타임스탬프와 단계 정보를 저장해, 앱 재진입 시 경과 시간을 계산하여 타이머를 복원했습니다.",
+        ],
+        result:
+          "앱을 닫았다가 다시 열어도 타이머가 정확하게 이어지는 사용성을 확보했습니다.",
+      },
+      {
+        title: "담당 업무 2) 단계 완료 알림(햅틱·인앱 오버레이·Web Notification) 구현",
+        problem:
+          "타이머가 끝났을 때 사용자가 앱을 보고 있지 않을 수 있어서, 다양한 방식으로 완료 시점을 알려야 했습니다.",
+        solutions: [
+          "앱인토스 web-bridge의 generateHapticFeedback API로 단계 완료 시 햅틱 진동을 발생시켰습니다.",
+          "화면 중앙에 인앱 오버레이 카드를 표시해 단식 완료/식사 종료 메시지를 전달했습니다.",
+          "브라우저 Web Notification API를 연동해 백그라운드에서도 시스템 알림이 전송되도록 했습니다.",
+        ],
+        result:
+          "앱 화면 안팎에서 단계 전환을 놓치지 않도록 세 가지 알림 수단을 제공했습니다.",
+      },
+      {
+        title: "담당 업무 3) 앱인토스 배너 광고(TossAds) 연동 및 앱 패키징",
+        problem:
+          "앱인토스 미니앱으로 배포하려면 TossAds 광고 연동과 ait 빌드 패키징이 필요했습니다.",
+        solutions: [
+          "TossAds.initialize와 TossAds.attachBanner로 하단 배너 광고를 연동했습니다.",
+          "ait build 명령으로 웹 번들과 React Native 번들(0.84.0/0.72.6)을 포함한 .ait 파일을 생성해 배포했습니다.",
+        ],
+        result:
+          "앱인토스 플랫폼에 배포 가능한 형태로 패키징을 완료했습니다.",
+      },
+    ],
+  },
 ]
 
 const companyProjects: CompanyProject[] = [
@@ -236,6 +303,7 @@ const companyProjects: CompanyProject[] = [
     periodStart: "2025-01",
     description: "2D/3D 지도 뷰어의 사용성과 분석 기능을 강화하기 위한 UI/기능 개선, 품질 정비를 수행했습니다.",
     tags: ["JavaScript"],
+    platforms: ["PC"],
     thumbnail: "/projects/ditap-js/thumbnail.png",
     detailImages: [
       "/projects/ditap-js/detail-01.png",
@@ -338,6 +406,7 @@ const companyProjects: CompanyProject[] = [
     periodStart: "2025-05",
     description: "운영/사용자 기능 확장과 모바일·웹 공통 기능 안정화를 위한 개발과 품질 정비를 수행했습니다.",
     tags: ["Java", "JSP", "Oracle", "PostgreSQL"],
+    platforms: ["PC"],
     thumbnail: "/projects/farmmap-service/thumbnail.png",
     detailImages: [
       "/projects/farmmap-service/detail-01.png",
@@ -430,6 +499,7 @@ const companyProjects: CompanyProject[] = [
     periodStart: "2024-08",
     description: "지도 기반 모니터링 기능부터 운영/분석 기능, 테스트 및 문서화까지 전반을 담당했습니다.",
     tags: ["Spring", "Next.js", "TypeScript", "PostgreSQL"],
+    platforms: ["PC"],
     thumbnail: "/projects/pohang-ai-crowd/thumbnail.png",
     detailImages: [
       "/projects/pohang-ai-crowd/detail-01.png",
@@ -652,7 +722,7 @@ export default function Portfolio() {
               <span className="text-[12px] text-muted-foreground tracking-widest uppercase">개인 프로젝트</span>
               <div className="h-px flex-1 bg-border" />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {sortedPersonalProjects.map((project) => (
                 <Card
                   key={project.id}
@@ -694,13 +764,22 @@ export default function Portfolio() {
                     </h4>
                     <p className="text-[12px] text-muted-foreground mb-3">{project.period}</p>
                     <p className="text-[12px] text-muted-foreground leading-relaxed mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-2">
                       {project.tags.map((tag) => (
                         <Badge key={tag} variant="outline" className="text-[12px] px-2 py-0.5 border-border text-muted-foreground">
                           {tag}
                         </Badge>
                       ))}
                     </div>
+                    {project.platforms && project.platforms.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.platforms.map((p) => (
+                          <Badge key={p} className="text-[11px] px-2 py-0.5 bg-[#00C8FF]/10 text-[#00C8FF] border border-[#00C8FF]/30 hover:bg-[#00C8FF]/20">
+                            {p}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
@@ -738,13 +817,22 @@ export default function Portfolio() {
                     </h4>
                     <p className="text-[12px] text-muted-foreground mb-3">{project.period}</p>
                     <p className="text-[12px] text-muted-foreground leading-relaxed mb-4 line-clamp-2">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-2">
                       {project.tags.map((tag) => (
                         <Badge key={tag} variant="outline" className="text-[12px] px-2 py-0.5 border-border text-muted-foreground">
                           {tag}
                         </Badge>
                       ))}
                     </div>
+                    {project.platforms && project.platforms.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.platforms.map((p) => (
+                          <Badge key={p} className="text-[11px] px-2 py-0.5 bg-[#00C8FF]/10 text-[#00C8FF] border border-[#00C8FF]/30 hover:bg-[#00C8FF]/20">
+                            {p}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
@@ -767,6 +855,11 @@ export default function Portfolio() {
                           {tag}
                         </Badge>
                       ))}
+                      {selectedProject.platforms && selectedProject.platforms.map((p) => (
+                        <Badge key={p} className="text-[12px] px-2 py-0.5 bg-[#00C8FF]/10 text-[#00C8FF] border border-[#00C8FF]/30">
+                          {p}
+                        </Badge>
+                      ))}
                     </div>
 
                     {selectedProject.overview && (
@@ -783,7 +876,7 @@ export default function Portfolio() {
                         <h3 className="text-[12px] text-[#00C8FF] tracking-wider mb-3 uppercase">예시 화면</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {selectedProject.detailImages.slice(0, 4).map((imagePath, index) => (
-                            <div key={imagePath} className="relative aspect-video overflow-hidden rounded-lg border border-border bg-background/50">
+                            <div key={imagePath} className={`relative overflow-hidden rounded-lg border border-border bg-background/50 ${selectedProject.platforms?.length === 1 && selectedProject.platforms[0] === '모바일' ? 'aspect-[9/16]' : 'aspect-video'}`}>
                               <Image
                                 src={imagePath}
                                 alt={`${selectedProject.title} 예시 화면 ${index + 1}`}
