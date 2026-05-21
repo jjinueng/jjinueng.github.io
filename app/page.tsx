@@ -730,7 +730,7 @@ export default function Portfolio() {
                   onClick={() => setSelectedProject(project)}
                 >
                   {project.thumbnail && (
-                    <div className="relative aspect-video overflow-hidden">
+                    <div className={`relative overflow-hidden ${project.platforms?.length === 1 && project.platforms[0] === '모바일' ? 'aspect-[9/16]' : 'aspect-video'}`}>
                       <Image
                         src={project.thumbnail}
                         alt={`${project.title} 썸네일`}
