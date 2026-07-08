@@ -296,7 +296,7 @@ const personalProjects: PersonalProject[] = [
   {
     id: 4,
     title: "데이트 코스 AI추천",
-    period: "2026.05 - 2026.07",
+    period: "2026.05 - 현재",
     periodStart: "2026-05",
     description:
       "AI가 취향·시간·분위기를 반영해 데이트 코스를 추천하고, 지도에서 장소를 교체·공유할 수 있는 앱인토스 미니앱입니다.",
@@ -499,7 +499,7 @@ const companyProjects: CompanyProject[] = [
   {
     id: 2,
     title: "농식품 팜맵 서비스",
-    period: "2025.05 - 2026.07",
+    period: "2025.05 - 현재",
     periodStart: "2025-05",
     description: "운영/사용자 기능 확장과 모바일·웹 공통 기능 안정화를 위한 개발과 품질 정비를 수행했습니다.",
     tags: ["Java", "JSP", "Oracle", "PostgreSQL"],
@@ -971,6 +971,13 @@ export default function Portfolio() {
                 </div>
                 <span className="text-[12px] text-[#00C8FF]/70">2024.07 — 2026.07</span>
               </div>
+            </div>
+          </div>
+
+          {/* Education */}
+          <div className="mb-20">
+            <h2 className="text-[12px] text-muted-foreground tracking-widest uppercase mb-6">교육</h2>
+            <div className="space-y-3">
               <div className="flex items-center justify-between p-5 rounded-lg bg-card border border-border hover:border-[#00C8FF]/30 transition-colors">
                 <div>
                   <p className="text-[12px] text-foreground mb-1">9roomthon Training</p>
