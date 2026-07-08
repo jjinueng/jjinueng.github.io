@@ -296,7 +296,7 @@ const personalProjects: PersonalProject[] = [
   {
     id: 4,
     title: "데이트 코스 AI추천",
-    period: "2026.05 - 현재",
+    period: "2026.05 - 2026.07",
     periodStart: "2026-05",
     description:
       "AI가 취향·시간·분위기를 반영해 데이트 코스를 추천하고, 지도에서 장소를 교체·공유할 수 있는 앱인토스 미니앱입니다.",
@@ -499,7 +499,7 @@ const companyProjects: CompanyProject[] = [
   {
     id: 2,
     title: "농식품 팜맵 서비스",
-    period: "2025.05 - 현재",
+    period: "2025.05 - 2026.07",
     periodStart: "2025-05",
     description: "운영/사용자 기능 확장과 모바일·웹 공통 기능 안정화를 위한 개발과 품질 정비를 수행했습니다.",
     tags: ["Java", "JSP", "Oracle", "PostgreSQL"],
@@ -679,6 +679,205 @@ const companyProjects: CompanyProject[] = [
       },
     ],
   },
+  {
+    id: 4,
+    title: "Digital Garam+ (K-Water)",
+    period: "2026.06 - 2026.07",
+    periodStart: "2026-06",
+    description:
+      "K-Water 디지털 가람+ JSP 기반 3D GIS 플랫폼을 Next.js로 이식하며, 지도·분석·기상·저장소 등 핵심 프론트엔드 기능을 구현했습니다.",
+    tags: ["Next.js", "TypeScript", "Cesium", "React Query"],
+    platforms: ["PC"],
+    thumbnail: "/projects/digital-garam/thumbnail.png",
+    detailImages: [
+      "/projects/digital-garam/detail-01.png",
+      "/projects/digital-garam/detail-02.png",
+      "/projects/digital-garam/detail-03.png",
+      "/projects/digital-garam/detail-04.png",
+    ],
+    overview:
+      "Digital Garam+는 K-Water 수자원 3D GIS 통합 플랫폼의 Next.js 이식 프로젝트입니다. 기존 Spring MVC/JSP(main.jsp) 기반 화면을 App Router 구조로 옮기면서, Cesium 3D 뷰어·사이드바·플로팅 위젯 중심의 UI를 유지하는 것이 핵심이었습니다. 담당 범위는 공통 레이아웃/상태 관리, GIS 측정·분석 도구, 레이어·배경지도 전환, 기상(호우실황·레이더·호우특보·태풍), 사용자 스토리지 열람 등이며, 원본 JSP의 마크업·동작·API 호출 흐름을 대조해 1:1에 가깝게 맞추는 방식으로 진행했습니다.",
+    keywords: [
+      "JSP → Next.js 이식 (Cesium 3D GIS)",
+      "측정·분석 도구 (면적분석·단면도·수위체적)",
+      "레이어/배경지도·주제도·침수 시각화",
+      "기상 UI (호우실황·레이더·호우특보·태풍)",
+      "사용자 스토리지 열람·마이페이지 연동",
+      "Zustand·React Query·i18n 정비",
+    ],
+    detailSections: [
+      {
+        title: "담당 업무 1) 공통 프레임워크·레이아웃·상태 관리 기반 구축",
+        problem:
+          "기존 JSP는 단일 main.jsp 안에서 팝업·패널로 기능이 열리는 구조였고, Next.js로 옮기면서 세션 가드·라우팅·공통 UI(모달/폼/토스트)·Zustand 스토어 설계가 먼저 정리되어야 했습니다.",
+        solutions: [
+          "App Router 기반 레이아웃(루트·protected·auth)과 세션 가드 구조를 구성했습니다.",
+          "공통 UI 컴포넌트(Modal/Confirm/Form/DatePicker/File 등)와 Zustand 스토어 패턴을 정리했습니다.",
+          "테마 토글, 하단 화면정보(MapLocalInfo) 등 누락 보정 항목을 기존 JSP 동선에 맞게 연결했습니다.",
+        ],
+        result:
+          "이후 도메인 기능(지도·기상·저장소)을 같은 패턴으로 쌓을 수 있는 프론트엔드 기반을 마련했습니다.",
+      },
+      {
+        title: "담당 업무 2) GIS 측정·분석 도구 이식 (면적분석·단면도·수위체적)",
+        problem:
+          "원본은 KWater3d 라이브러리와 jQuery DOM 조작 기반이었고, Next.js에서는 Cesium 컴포넌트·Zustand·팝업 컴포넌트로 동일 UX를 재현해야 했습니다. 단면도·면적분석·SHP 업로드 분석 등 팝업 마크업/스타일까지 JSP와 맞춰야 했습니다.",
+        solutions: [
+          "거리·표고·면적·반경 측정 도구와 초기화 버튼을 floating widget 구조로 이식했습니다.",
+          "면적분석(클릭/SHP 파일), 단면도(TerrainProfile), 수위체적 팝업을 JSP id/class·Chart.js 옵션 기준으로 구현했습니다.",
+          "정북·확대축소·이동·기울기·인덱스맵 등 지도 컨트롤 UI를 연동했습니다.",
+        ],
+        result:
+          "메인 지도 화면에서 JSP와 동일한 진입점·팝업·측정 흐름으로 분석 업무를 수행할 수 있게 했습니다.",
+      },
+      {
+        title: "담당 업무 3) 레이어·배경지도·주제도 표출 (BaseMap / Thematic / Visualization)",
+        problem:
+          "배경지도(일반·하이브리드)·항공사진 연도·밝기 조절, 범람·침수·행정 주제 레이어 등 WMS/GeoJSON 기반 레이어 ON/OFF가 사이드바 Map 패널에서 동작해야 했습니다.",
+        solutions: [
+          "BaseMapSection에서 배경지도·항공사진 전환 및 밝기 슬라이더를 useImageryLayerStore와 연동했습니다.",
+          "ThematicMapSection·VisualizationSection·floodLayers.ts로 주제/침수 레이어 토글 로직을 mapLayerActions에 통합했습니다.",
+          "권역 GeoJSON locale(en/ko) 분기, alternate datasource 숨김 등 i18n 연동을 반영했습니다.",
+        ],
+        result:
+          "사이드바에서 레이어 가시성·배경지도를 JSP와 유사한 방식으로 제어할 수 있는 구조를 완성했습니다. (일부 레이어는 내부망·GeoServer 환경에서 추가 검증 필요)",
+      },
+      {
+        title: "담당 업무 4) 기상 기능 이식 (호우실황·레이더·호우특보·태풍)",
+        problem:
+          "기상 메뉴는 JSP에서 호우실황·호우특보·태풍 3종 중심이며, 레이더 강수 애니메이션·하단 타임라인·지도 오버레이·영문 UI까지 함께 맞춰야 했습니다. 셰이더·zip 데이터 등 내부망 의존 리소스도 있었습니다.",
+        solutions: [
+          "WeatherPanel/WeatherMenuSection과 HeavyRain·RainAlert·Typhoon Section을 연결하고 메인 page에 패널·레이어를 마운트했습니다.",
+          "RadarLayer, RadarRainfallTimeline, 호우실황 비주얼라이저·범례·로딩 오버레이를 구현했습니다.",
+          "message-common_en.properties 기준 영문 area/기상 UI 키를 en.json에 정렬하고, POI·GeoJSON locale 연동을 보완했습니다.",
+        ],
+        result:
+          "기상 사이드바 진입부터 지도 표출·하단 타임라인 재생까지 이어지는 흐름을 Next.js에서 재현했습니다. (호우/레이더 zip·오라클 등 내부망 데이터 검증은 진행 중)",
+      },
+      {
+        title: "담당 업무 5) 사용자 스토리지 열람·마이페이지 연동",
+        problem:
+          "JSP userStorageDetailList.jsp는 사용량 차트(Highcharts)·폴더별 용량·파일 이용 내역·삭제까지 한 화면에서 처리하며, 마이페이지 사이드바 menu07으로 진입합니다.",
+        solutions: [
+          "getMypageUser → getStorageInsertLogDetail → getUserDetailStroage API 체인을 storageService·React Query로 구현했습니다.",
+          "StorageUsagePanel(바·파이·막대 차트), StorageFileList(페이지네이션·삭제)를 JSP 마크업 id/class 기준으로 구성했습니다.",
+          "마이페이지 간단 사이드바 셸·/storage 라우트 연동, 삭제 확인/성공 모달(public_confirm) UX를 JSP와 맞췄습니다.",
+        ],
+        result:
+          "로그인 사용자가 스토리지 사용량·파일 목록을 조회·삭제할 수 있는 화면을 Next.js protected 라우트로 제공했습니다.",
+      },
+      {
+        title: "품질/협업) JSP 대조·코드 스타일·이식 범위 정리",
+        problem:
+          "다수 업체가 영역별로 나뉘어 이식하는 프로젝트라, 화면 단위로 JSP와 diff를 맞추고 불필요한 리팩터링 없이 범위를 지켜야 했습니다.",
+        solutions: [
+          "원본 JSP/JS(userStorageManage.js, main_left_menu.jsp 등)와 UI·API·표시 포맷을 대조하며 차이를 수정했습니다.",
+          "파일 타입 표시(zip/png vs img/shp)처럼 화면별 변환 규칙이 다른 경우 원본 동작을 기준으로 맞췄습니다.",
+          "WBS·CLAUDE.md 기준 컴포넌트 위치·네이밍·주석 스타일을 팀 컨벤션에 맞게 유지했습니다.",
+        ],
+        result:
+          "이식 품질을 '동작 일치' 기준으로 관리하면서, 후속 Wave(홍수·관리자·성능 최적화)로 넘길 수 있는 상태를 유지했습니다.",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "연속복합측위 지원 서버 (실내측위)",
+    period: "2026.04 - 2026.07",
+    periodStart: "2026-04",
+    description:
+      "WiFi 지문 기반 CNN 실내측위 알고리즘을 직접 구현하고, KNN 하이브리드·측위 안정화와 BLE 비콘 보정, 비콘·학습 관리 기능까지 측위 파이프라인 전반을 개발했습니다.",
+    tags: ["Java", "Spring Boot", "Python", "PyTorch", "PostgreSQL", "Docker"],
+    platforms: ["PC"],
+    thumbnail: "/projects/etri-indoor-positioning/thumbnail.png",
+    detailImages: [
+      "/projects/etri-indoor-positioning/detail-01.png",
+      "/projects/etri-indoor-positioning/detail-02.png",
+      "/projects/etri-indoor-positioning/detail-03.png",
+      "/projects/etri-indoor-positioning/detail-04.png",
+    ],
+    overview:
+      "연속복합측위 지원 서버의 WiFi 지문 기반 CNN 실내측위를 처음부터 직접 구현했습니다. PyTorch로 CNN 모델·전처리·학습 파이프라인을 구축하고, 이를 Spring Boot 측위 서버와 연동해 실시간 측위를 제공했습니다. 여기에 KNN 하이브리드와 튐 완화·층 우선 필터로 정확도와 안정성을 개선하고, WiFi가 약하거나 없는 구역을 보완하는 BLE 비콘 보정을 설계·구현했습니다. 비콘 위치 등록 관리 페이지와 건물별 CNN 학습 관리 페이지를 개발하고, 측위 결과를 실측 데이터로 시각화·검증했습니다.",
+    keywords: [
+      "WiFi 지문 CNN 실내측위 직접 구현(PyTorch · Spring 연동)",
+      "KNN 하이브리드 · 튐 완화 · 층 우선 필터로 정확도/안정성 개선",
+      "BLE 비콘 보정(RSSI 가중평균 · delta 보정)",
+      "비콘 위치 등록 관리 페이지(실내지도 기반)",
+      "CNN 학습 관리 페이지(weight 파일 · Docker 볼륨 기반)",
+      "측위 정확도 실측 검증(WiFi 사각지대 평균 1m대)",
+    ],
+    detailSections: [
+      {
+        title: "담당 업무 1) WiFi 지문 CNN 실내측위 알고리즘 직접 구현",
+        problem:
+          "WiFi 지문(수집한 AP별 신호 세기)만으로 실내 위치를 추정하는 CNN 측위 엔진을 처음부터 구축하고, 측위 서버에서 실시간으로 동작하도록 연동해야 했습니다.",
+        solutions: [
+          "PyTorch로 CNN 모델과 전처리(AP 사전 구성·지문 벡터화), 건물·층별 학습 파이프라인을 신규 구현했습니다.",
+          "Python 측위 엔진과 Spring Boot 서버를 HTTP로 연동해, 수집 데이터로 학습하고 측위 요청 시 CNN이 좌표를 추론하는 전 과정을 구축했습니다.",
+          "학습 페어 생성 시 건물·층을 구분하고 MAC 가중치를 반영해, 서로 다른 공간이 섞이지 않도록 측위 정확도를 높였습니다.",
+        ],
+        result:
+          "WiFi 지문만으로 실내 위치를 추정하는 CNN 측위 시스템을 자체 구현해, 연속복합측위 지원 서버의 실내측위 기능으로 제공했습니다.",
+      },
+      {
+        title: "담당 업무 2) 측위 정확도·안정성 개선 및 오측위 원인 분석",
+        problem:
+          "초기 CNN 결과가 위치가 튀거나(불안정), 특정 지점에서 실제와 다른 건물·층으로 측위되는 문제가 있어 정확도와 안정성을 함께 개선해야 했습니다.",
+        solutions: [
+          "CNN 단독 대신 KNN 하이브리드로 후보를 보정하고, 층 우선(floor-first) 필터·이동량 제한(max-step)·EKF로 위치 튐을 완화했습니다.",
+          "서버 로그와 수집 데이터(DB)를 분석해, 오측위가 해당 구역의 WiFi 지문 부족과 여러 건물에 걸친 공용 AP에서 비롯됨을 규명했습니다.",
+          "좌표와 건물·층이 서로 다른 경로로 결정되어 불일치하는 구조적 원인을 찾아, 비콘 보정이라는 보완 방향을 도출했습니다.",
+        ],
+        result:
+          "측위 안정성을 확보하고, 오측위가 알고리즘 결함이 아닌 데이터 공백에서 비롯됨을 확인해 다음 보완(비콘 보정) 방향을 세웠습니다.",
+      },
+      {
+        title: "담당 업무 3) BLE 비콘 보정 로직 설계·구현",
+        problem:
+          "WiFi 지문이 없거나 약한 구역에서는 CNN 측위가 부정확했고, 학습에 영향을 주지 않으면서 이를 보완할 방법이 필요했습니다.",
+        solutions: [
+          "비콘은 CNN 학습에 넣지 않고, WiFi 측위 결과가 나온 뒤 마지막 단계에서 등록된 비콘으로 좌표를 보정하도록 설계했습니다.",
+          "여러 비콘이 감지되면 신호 세기(RSSI)를 가중치로 위치(가중 중심)를 계산하고, 측위 결과를 그 지점으로 delta 보정하도록 구현했습니다(비콘 여러 개 설치 구역 대응).",
+          "강한 신호만 사용하고 1회 이동량을 제한해, 위치가 급격히 튀지 않도록 안정성을 확보했습니다.",
+        ],
+        result:
+          "WiFi 지문이 없는 구역에서도 비콘 보정만으로 실제 위치를 평균 약 1m 오차로 측위함을 실측으로 확인했습니다.",
+      },
+      {
+        title: "담당 업무 4) 비콘 위치 등록 관리 페이지 개발",
+        problem:
+          "비콘을 측위 보정에 활용하려면 각 비콘의 실제 설치 위치를 등록·관리할 수 있어야 했습니다.",
+        solutions: [
+          "비콘 MAC 화이트리스트 등록·수정·삭제 기능과 조회 캐시를 개발했습니다.",
+          "실내지도 위에서 포인트를 클릭해 비콘의 건물·층·좌표를 등록하는 UI를 구현했습니다.",
+        ],
+        result:
+          "설치한 비콘의 위치를 지도에서 직접 등록·관리하고 측위 보정에 활용할 수 있는 기반을 마련했습니다.",
+      },
+      {
+        title: "담당 업무 5) CNN 학습 관리 페이지 개발",
+        problem:
+          "건물별 CNN 측위 모델의 학습 상태와 결과를 화면에서 확인할 수 있어야 했습니다.",
+        solutions: [
+          "건물을 선택해 학습을 실행하고, 최근 학습일자와 결과(오차 등)를 조회하는 페이지를 개발했습니다.",
+          "가중치·메타 파일을 Docker 볼륨으로 분리·영속화하고, 별도 이력 DB 없이 weight/결과 파일로 건물별 최신 상태를 표시하도록 구성했습니다.",
+        ],
+        result:
+          "학습 실행부터 결과 확인까지 한 화면에서 관리하고, 별도 이력 테이블 없이 가볍게 최신 상태를 파악할 수 있게 했습니다.",
+      },
+      {
+        title: "담당 업무 6) 측위 정확도 실측 검증",
+        problem:
+          "구현·개선한 측위와 보정이 실제로 정확한지 수치로 검증할 필요가 있었습니다.",
+        solutions: [
+          "측위 로그와 수집 데이터를 좌표로 시각화하고, 실제 위치 기준 오차(평균·중앙·최대)를 계산했습니다.",
+          "WiFi 지문이 없는 구역에서 측위 결과 분포와 실제 위치를 비교해 보정 효과를 확인했습니다.",
+        ],
+        result:
+          "WiFi 사각지대에서 비콘 보정으로 평균 1m대 정확도를 달성함을 실측 데이터로 검증했습니다.",
+      },
+    ],
+  },
 
 ]
 
@@ -770,7 +969,7 @@ export default function Portfolio() {
                   <p className="text-[12px] text-foreground mb-1">Full-Stack Developer</p>
                   <p className="text-[12px] text-muted-foreground">Heliosen</p>
                 </div>
-                <span className="text-[12px] text-[#00C8FF]/70">2024.07 — 현재</span>
+                <span className="text-[12px] text-[#00C8FF]/70">2024.07 — 2026.07</span>
               </div>
               <div className="flex items-center justify-between p-5 rounded-lg bg-card border border-border hover:border-[#00C8FF]/30 transition-colors">
                 <div>
