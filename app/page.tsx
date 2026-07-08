@@ -499,7 +499,7 @@ const companyProjects: CompanyProject[] = [
   {
     id: 2,
     title: "농식품 팜맵 서비스",
-    period: "2025.05 - 현재",
+    period: "2025.05 - 2026.07",
     periodStart: "2025-05",
     description: "운영/사용자 기능 확장과 모바일·웹 공통 기능 안정화를 위한 개발과 품질 정비를 수행했습니다.",
     tags: ["Java", "JSP", "Oracle", "PostgreSQL"],
