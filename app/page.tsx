@@ -1291,7 +1291,7 @@ export default function Portfolio() {
       <footer className="border-t border-border py-8 px-6">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <span className="text-[12px] text-[#00C8FF] tracking-widest">JJINUENG.DEV</span>
-          <p className="text-[12px] text-muted-foreground">© 2025 jjinueng</p>
+          <p className="text-[12px] text-muted-foreground">© 2025–{new Date().getFullYear()} jjinueng</p>
           <div className="flex gap-4">
             <a href="https://github.com/jjinueng" className="text-muted-foreground hover:text-foreground transition-colors">
               <Github className="h-4 w-4" />
